@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #a6e1f5, #ffb3d9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+}
+h1 {
+    margin-bottom: 20px;
+}
+#journalInput {
+    padding: 10px;
+    width: 300px;
+    height: 100px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    resize: none;
+}
+#saveEntry {
+    padding: 10px 15px;
+    background-color: #ff4d94;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#saveEntry:hover {
+    background-color: #ff1a75;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 300px;
+    margin-top: 20px;
+}
+li {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.removeEntry {
+    background-color: transparent;
+    border: none;
+    color: #ff4d94;
+    cursor: pointer;
+    float: right;
+}
+.removeEntry:hover {
+    color: #ff1a75;
+}
