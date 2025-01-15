@@ -1,15 +1,23 @@
 function appendToDisplay(value) {
-    document.getElementById('display').value += value;
+    const display = document.getElementById('display');
+    display.value += value;
 }
 
 function clearDisplay() {
-    document.getElementById('display').value = '';
+    const display = document.getElementById('display');
+    display.value = '';
 }
 
 function calculate() {
-    const display = document.getElementById('display').value;
-    const result = evaluateExpression(display);
-    display.value = result !== undefined ? result : 'Error';
+    const display = document.getElementById('display');
+    const expr = display.value;
+
+    try {
+        const result = evaluateExpression(expr);
+        display.value = result !== undefined ? result : 'Error';
+    } catch {
+        display.value = 'Error';
+    }
 }
 
 function evaluateExpression(expr) {
@@ -22,17 +30,23 @@ function evaluateExpression(expr) {
             values.push(parseFloat(token));
         } else if (['+', '-', '*', '/'].includes(token)) {
             while (operators.length && precedence(operators[operators.length - 1]) >= precedence(token)) {
-                values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
+                const b = values.pop();
+                const a = values.pop();
+                const op = operators.pop();
+                values.push(applyOperation(op, a, b));
             }
             operators.push(token);
         }
     }
 
     while (operators.length) {
-        values.push(applyOperation(operators.pop(), values.pop(), values.pop()));
+        const b = values.pop();
+        const a = values.pop();
+        const op = operators.pop();
+        values.push(applyOperation(op, a, b));
     }
 
-    return values.length ? values[0] : undefined;
+    return values[0]; // Return the final result
 }
 
 function precedence(op) {
@@ -41,7 +55,7 @@ function precedence(op) {
     return 0;
 }
 
-function applyOperation(op, b, a) {
+function applyOperation(op, a, b) {
     switch (op) {
         case '+': return a + b;
         case '-': return a - b;
